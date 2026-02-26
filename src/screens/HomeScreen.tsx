@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Touchable, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Touchable, TouchableOpacity, ImageBackground } from 'react-native';
 import React, { useEffect, useState, useMemo } from 'react';
 import BackendResponse from '../constants/backend-response.json';
 import { ChargingHistoryResponse, ChargingState } from '../types';
@@ -42,32 +42,36 @@ export default function HomeScreen() {
   }, [selectedTime, chargingCurrentState]);
 
   return (
-    <View style={styles.container}>
+  <ImageBackground
+      source={require('../assets/background.jpg')}
+      style={styles.backgroundImage}
+    >
+      <View style={styles.container}>
+        <TouchableOpacity
+          style={styles.languageButtonTop}
+          onPress={() => setLanguageModalVisible(true)}
+        >
+          <Text style={styles.languageButtonText}>{t("language")} 🌍</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.languageButtonTop}
-        onPress={() => setLanguageModalVisible(true)}
-      >
-        <Text style={styles.languageButtonText}>{t("language")} 🌍</Text>
-      </TouchableOpacity>
+        <Text style={styles.title}>{t("header")}</Text>
 
-      <Text style={styles.title}>{t("header")}</Text>
+        <TimePicker
+          data={chargingCurrentState}
+          selectedTime={selectedTime}
+          onTimeChange={setSelectedTime}
+        />
 
-      <TimePicker
-        data={chargingCurrentState}
-        selectedTime={selectedTime}
-        onTimeChange={setSelectedTime}
-      />
+        {matchedBattery && (
+          <BatteryComponent batteryData={matchedBattery} />
+        )}
 
-      {matchedBattery && (
-        <BatteryComponent batteryData={matchedBattery} />
-      )}
-
-      <LanguageModal
-        visible={languageModalVisible}
-        onClose={() => setLanguageModalVisible(false)}
-      />
-    </View>
+        <LanguageModal
+          visible={languageModalVisible}
+          onClose={() => setLanguageModalVisible(false)}
+        />
+      </View>
+    </ImageBackground>
   );
 }
 
@@ -79,6 +83,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
+    color: '#fff',
     fontWeight: 'bold',
     marginBottom: 20,
     paddingTop: "20%",
@@ -93,8 +98,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 6,
   },
-
   languageButtonText: {
     fontSize: 20,
+    color: '#fff',
+  },
+  backgroundImage: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover', // ensures image covers the screen
   },
 });

@@ -48,15 +48,21 @@ export default function BatteryComponent({ batteryData }: Props) {
         {batteryData.chargingLevel}%
       </Text>
 
-      <Text style={[
-        styles.stateText,
-        batteryData.currentState === 'Charging' && { color: 'green' },
-        batteryData.currentState === 'Discharging' && { color: 'red' }
-      ]}>
-        {batteryData.currentState === 'Charging' && t("charge")}
-        {batteryData.currentState === 'Discharging' && t("discharge")}
-        {batteryData.currentState === 'Neutral' && t("neutral")}
-      </Text>
+      <View style={[
+        { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 20, paddingVertical: 10, borderRadius: 30, marginTop: 30 },
+        batteryData.currentState === 'Charging' && { backgroundColor: '#3cb371' },
+        batteryData.currentState === 'Discharging' && { backgroundColor: '#ff6347' },
+        batteryData.currentState === 'Neutral' && { backgroundColor: '#f0e68c' },
+        ]}>
+        <Text style={[
+          styles.stateText
+
+        ]}>
+          {batteryData.currentState === 'Charging' && t("charge")}
+          {batteryData.currentState === 'Discharging' && t("discharge")}
+          {batteryData.currentState === 'Neutral' && t("neutral")}
+        </Text>
+      </View>
 
     </View>
   );
@@ -78,5 +84,6 @@ const styles = StyleSheet.create({
   stateText: {
     fontSize: 28,
     marginTop: 5,
+    color: '#000',
   }
 });
