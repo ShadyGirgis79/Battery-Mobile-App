@@ -1,10 +1,13 @@
 {
   "header": "سجل شحن البطارية",
   "welcome": "مرحبًا بك في تطبيق بطارية Sonnen",
+  "chooseLanguage": "اختر لغتك",
+  "language": "اللغة",
   "english": "الإنجليزية",
   "arabic": "العربية",
   "german": "الألمانية",
   "close": "إغلاق",
+  "selectTime": "اختر الوقت",
   "charge": "شحن",
   "discharge": "تفريغ",
   "neutral": "محايد"

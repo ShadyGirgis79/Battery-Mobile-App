@@ -17,17 +17,16 @@ interface Props {
 }
 
 const LanguageModal: React.FC<Props> = ({ visible, onClose }) => {
-  const { i18n } = useTranslation();
+  const {t, i18n } = useTranslation();
 
   const changeLanguage = async (lang: string) => {
-
     await AsyncStorage.setItem('language', lang);
     i18n.changeLanguage(lang);
     if (lang === 'ar') {
       I18nManager.forceRTL(true);
       I18nManager.allowRTL(true);
-      NativeModules.DevSettings.reload();
     }
+    NativeModules.DevSettings.reload();
     onClose();
   };
 
@@ -40,31 +39,31 @@ const LanguageModal: React.FC<Props> = ({ visible, onClose }) => {
     >
       <View style={styles.overlay}>
         <View style={styles.modalContainer}>
-          <Text style={styles.title}>Choose Language</Text>
+          <Text style={styles.title}>{t("chooseLanguage")}</Text>
 
           <TouchableOpacity
             style={styles.languageButton}
             onPress={() => changeLanguage('en')}
           >
-            <Text style={styles.languageText}>English</Text>
+            <Text style={styles.languageText}>{t("english")}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.languageButton}
             onPress={() => changeLanguage('ar')}
           >
-            <Text style={styles.languageText}>Arabic</Text>
+            <Text style={styles.languageText}>{t("arabic")}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.languageButton}
             onPress={() => changeLanguage('de')}
           >
-            <Text style={styles.languageText}>German</Text>
+            <Text style={styles.languageText}>{t("german")}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.closeButton} onPress={onClose}>
-            <Text style={{ color: '#fff' }}>Close</Text>
+            <Text style={{ color: '#fff' }}>{t("close")}</Text>
           </TouchableOpacity>
         </View>
       </View>

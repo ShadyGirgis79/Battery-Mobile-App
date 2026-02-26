@@ -1,10 +1,13 @@
 {
   "header": "Batterieladeverlauf",
   "welcome": "Willkommen in der Sonnen Batterie App",
+  "chooseLanguage": "Wähle deine Sprache",
+  "language": "Sprache",
   "english": "Englisch",
   "arabic": "Arabisch",
   "german": "Deutsch",
   "close": "Schließen",
+  "selectTime": "Zeit auswählen",
   "charge": "Laden",
   "discharge": "Entladen",
   "neutral": "Neutral"

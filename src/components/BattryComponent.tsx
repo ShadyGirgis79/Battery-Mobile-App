@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { ChargingState } from '../types';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   batteryData: ChargingState;
@@ -8,11 +9,37 @@ interface Props {
 
 export default function BatteryComponent({ batteryData }: Props) {
 
+  const { t } = useTranslation();
+  const [batteryState, setBatteryState] = useState("");
+  const [batteryImage, setBatteryImage] = useState(require('../assets/Battery-100.png'));
+
+  const updateBatteryImage = (level: number) => {
+    if (level >= 80) {
+      setBatteryImage(require('../assets/Battery-100.png'));
+    } else if (level >= 60) {
+      setBatteryImage(require('../assets/Battery-80.png'));
+    } else if (level >= 40) {
+      setBatteryImage(require('../assets/Battery-60.png'));
+    } else if (level >= 20) {
+      setBatteryImage(require('../assets/Battery-40.png'));
+    } else {
+      setBatteryImage(require('../assets/Battery-20.png'));
+    }
+  };
+
+
+
+  useEffect(() => {
+    updateBatteryImage(batteryData.chargingLevel);
+  }, [batteryData]);
+
+  
+
   return (
     <View style={styles.container}>
       
       <Image
-        source={require('../assets/Battery-100.png')}
+        source={batteryImage}
         style={styles.image}
         resizeMode="contain"
       />
@@ -26,7 +53,9 @@ export default function BatteryComponent({ batteryData }: Props) {
         batteryData.currentState === 'Charging' && { color: 'green' },
         batteryData.currentState === 'Discharging' && { color: 'red' }
       ]}>
-        {batteryData.currentState}
+        {batteryData.currentState === 'Charging' && t("charge")}
+        {batteryData.currentState === 'Discharging' && t("discharge")}
+        {batteryData.currentState === 'Neutral' && t("neutral")}
       </Text>
 
     </View>
@@ -38,16 +67,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    width: 200,
-    height: 100,
+    width: 800,
+    height: 400,
   },
   levelText: {
-    fontSize: 26,
+    fontSize: 48,
     fontWeight: 'bold',
     marginTop: 10,
   },
   stateText: {
-    fontSize: 18,
+    fontSize: 28,
     marginTop: 5,
   }
 });

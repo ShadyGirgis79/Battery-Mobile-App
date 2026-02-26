@@ -17,9 +17,6 @@ export default function HomeScreen() {
   const [selectedTime, setSelectedTime] = useState<string | null>(currentTime);
   const [languageModalVisible, setLanguageModalVisible] = useState(false);
 
-  console.log('Current Timexxxxxxxxx', currentTime);
-  console.log('Current Time===:', selectedTime);
-
   const chargingData = async () => {
     try {
       // Will change it with the backend API call
@@ -51,7 +48,7 @@ export default function HomeScreen() {
         style={styles.languageButtonTop}
         onPress={() => setLanguageModalVisible(true)}
       >
-        <Text style={styles.languageButtonText}>🌍</Text>
+        <Text style={styles.languageButtonText}>{t("language")} 🌍</Text>
       </TouchableOpacity>
 
       <Text style={styles.title}>{t("header")}</Text>
@@ -81,15 +78,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontSize: 22,
+    fontSize: 32,
     fontWeight: 'bold',
     marginBottom: 20,
+    paddingTop: "20%",
   },
   languageButtonTop: {
     position: 'absolute',
-    top: 50,
+    top: 80,
     right: 20,
-    borderWidth: 1,
+    borderWidth: 2,
     borderColor: '#3b5ea7',
     borderRadius: 25,
     paddingHorizontal: 12,
@@ -97,6 +95,6 @@ const styles = StyleSheet.create({
   },
 
   languageButtonText: {
-    fontSize: 18,
+    fontSize: 20,
   },
 });

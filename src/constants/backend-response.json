@@ -7,7 +7,7 @@
     },
     {
       "date": "2024-09-02T08:00:02.836Z",
-      "chargingLevel": 44,
+      "chargingLevel": 85,
       "internalEventId": 347729
     },
     {
@@ -22,12 +22,12 @@
     },
     {
       "date": "2024-09-02T11:00:02.935Z",
-      "chargingLevel": 51,
+      "chargingLevel": 31,
       "internalEventId": 999341
     },
     {
       "date": "2024-09-02T12:00:03.345Z",
-      "chargingLevel": 55,
+      "chargingLevel": 18,
       "internalEventId": 409775
     },
     {
@@ -37,12 +37,12 @@
     },
     {
       "date": "2024-09-02T14:00:01.231Z",
-      "chargingLevel": 67,
+      "chargingLevel": 75,
       "internalEventId": 305212
     },
     {
       "date": "2024-09-02T16:00:05.735Z",
-      "chargingLevel": 71,
+      "chargingLevel": 92,
       "internalEventId": 178869
     },
     {
@@ -52,7 +52,7 @@
     },
     {
       "date": "2024-09-02T18:00:01.866Z",
-      "chargingLevel": 61,
+      "chargingLevel": 47,
       "internalEventId": 624563
     },
     {
@@ -62,7 +62,7 @@
     },
     {
       "date": "2024-09-02T20:00:10.376Z",
-      "chargingLevel": 52,
+      "chargingLevel": 8,
       "internalEventId": 932071
     },
     {
@@ -87,12 +87,12 @@
     },
     {
       "date": "2024-09-03T01:00:01.643Z",
-      "chargingLevel": 43,
+      "chargingLevel": 83,
       "internalEventId": 919020
     },
     {
       "date": "2024-09-03T02:00:03.736Z",
-      "chargingLevel": 42,
+      "chargingLevel": 68,
       "internalEventId": 381231
     },
     {
@@ -107,7 +107,7 @@
     },
     {
       "date": "2024-09-03T05:00:04.432Z",
-      "chargingLevel": 42,
+      "chargingLevel": 92,
       "internalEventId": 262147
     },
     {
