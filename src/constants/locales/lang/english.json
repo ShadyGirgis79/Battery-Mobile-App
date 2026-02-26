@@ -1,0 +1,11 @@
+{
+    "header": "Battery Charging History",
+    "welcome": "Welcome to Sonnen Battery App",
+    "english": "English",
+    "arabic": "Arabic",
+    "german": "German",
+    "close": "Close",
+    "charge": "Charging",
+    "discharge": "Discharging",
+    "neutral": "Neutral"
+}

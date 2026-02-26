@@ -13,6 +13,9 @@ export default function TimePicker({ data, selectedTime, onTimeChange }: Props) 
 
   const [isVisible, setIsVisible] = useState(false);
 
+  console.log('TimePicker Data:', data);
+  console.log('Selected Time in TimePicker:', selectedTime);
+
   const handleConfirm = (date: Date) => {
     setIsVisible(false);
 

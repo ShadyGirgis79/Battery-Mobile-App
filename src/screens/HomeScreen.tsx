@@ -1,26 +1,32 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Touchable, TouchableOpacity } from 'react-native';
 import React, { useEffect, useState, useMemo } from 'react';
 import BackendResponse from '../constants/backend-response.json';
 import { ChargingHistoryResponse, ChargingState } from '../types';
 import { checkChargingState } from "../utils/BatteryState";
+import { useTranslation } from 'react-i18next';
+import LanguageModal from '../components/LanguageModal';
 import BatteryComponent from '../components/BattryComponent';
 import TimePicker from '../components/TimePicker';
 
 export default function HomeScreen() {
 
+  const { t } = useTranslation();
+  const currentTime = new Date().toISOString();
+
   const [chargingCurrentState, setChargingCurrentState] = useState<ChargingState[]>([]);
-  const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  const [selectedTime, setSelectedTime] = useState<string | null>(currentTime);
+  const [languageModalVisible, setLanguageModalVisible] = useState(false);
+
+  console.log('Current Timexxxxxxxxx', currentTime);
+  console.log('Current Time===:', selectedTime);
 
   const chargingData = async () => {
     try {
+      // Will change it with the backend API call
       const data = BackendResponse as ChargingHistoryResponse;
+      
       const processed = checkChargingState(data.chargingStates);
       setChargingCurrentState(processed);
-
-      // Set default time to first item
-      if (processed.length > 0) {
-        setSelectedTime(processed[0].date);
-      }
 
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -40,7 +46,15 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Battery Charging History</Text>
+
+      <TouchableOpacity
+        style={styles.languageButtonTop}
+        onPress={() => setLanguageModalVisible(true)}
+      >
+        <Text style={styles.languageButtonText}>🌍</Text>
+      </TouchableOpacity>
+
+      <Text style={styles.title}>{t("header")}</Text>
 
       <TimePicker
         data={chargingCurrentState}
@@ -51,6 +65,11 @@ export default function HomeScreen() {
       {matchedBattery && (
         <BatteryComponent batteryData={matchedBattery} />
       )}
+
+      <LanguageModal
+        visible={languageModalVisible}
+        onClose={() => setLanguageModalVisible(false)}
+      />
     </View>
   );
 }
@@ -65,5 +84,19 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: 'bold',
     marginBottom: 20,
-  }
+  },
+  languageButtonTop: {
+    position: 'absolute',
+    top: 50,
+    right: 20,
+    borderWidth: 1,
+    borderColor: '#3b5ea7',
+    borderRadius: 25,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+  },
+
+  languageButtonText: {
+    fontSize: 18,
+  },
 });
