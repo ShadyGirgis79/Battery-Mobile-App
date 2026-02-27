@@ -1,20 +1,42 @@
-import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import { ImageBackground, StyleSheet, Text, TouchableOpacity, View, PermissionsAndroid } from 'react-native';
+import React, { useEffect } from 'react';
+import messaging from '@react-native-firebase/messaging';
 import { useTranslation } from 'react-i18next';
 import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { Home, Welcome } from "../navigations/routes";
-import SwipeToActionButton from '../components/SwipeToActionButton';
+import { Home } from "../navigations/routes";
 
 
 export default function WelcomeScreen() {
     const { t } = useTranslation();
     const navigation = useNavigation();
 
-    const handleJoinNow = () => {
-        // @ts-ignore
-        navigation.push(Home)
+    const requestPermissions = async () => {
+        try {
+            const res = await  PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
+            if (res === PermissionsAndroid.RESULTS.GRANTED) {
+                requestToken();
+
+            } else {
+                console.log("Notification permission denied");
+            }
+        } catch (err) {
+            console.warn(err);
+        }
     };
+
+    const requestToken = async () => {
+        try{
+            await messaging().registerDeviceForRemoteMessages();
+            const token = await messaging().getToken();
+            console.log("FCM Token => ", token);
+        }catch(error){
+            console.error(error);
+        }
+    };
+
+    useEffect(() => {
+        requestPermissions();
+    }, []);
 
     return (
         <ImageBackground
@@ -29,7 +51,10 @@ export default function WelcomeScreen() {
             </View>
             
             <TouchableOpacity
-                onPress={handleJoinNow}
+                onPress={() => {
+                    // @ts-ignore
+                    navigation.push(Home)
+                }}
                 style={styles.bottomContainer}
                 activeOpacity={0.8}
             >
