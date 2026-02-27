@@ -59,7 +59,7 @@ export default function TimePicker({ data, selectedTime, onTimeChange }: Props) 
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 30,
+    marginBottom: 10,
   },
   button: {
     padding: 12,

@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontSize: 32,
+    fontSize: 28,
     color: '#fff',
     marginBottom: 20,
     paddingTop: "25%",
@@ -92,12 +92,14 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: "10%",
     left: 20,
+    zIndex: 10,              // 👈 ADD THIS
+    elevation: 10,           // 👈 For Android
     borderWidth: 2,
     borderColor: '#3b5ea7',
     borderRadius: 25,
     paddingHorizontal: 12,
     paddingVertical: 6,
-    backgroundColor: 'rgba(59, 94, 167, 0.8)', // semi-transparent background
+    backgroundColor: 'rgba(59, 94, 167, 0.8)',
   },
   languageButtonText: {
     fontSize: 20,
