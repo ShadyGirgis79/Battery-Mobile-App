@@ -10,7 +10,6 @@ interface Props {
 export default function BatteryComponent({ batteryData }: Props) {
 
   const { t } = useTranslation();
-  const [batteryState, setBatteryState] = useState("");
   const [batteryImage, setBatteryImage] = useState(require('../assets/images/Battery-100.png'));
 
   const updateBatteryImage = (level: number) => {
@@ -27,14 +26,11 @@ export default function BatteryComponent({ batteryData }: Props) {
     }
   };
 
-
-
   useEffect(() => {
     updateBatteryImage(batteryData.chargingLevel);
   }, [batteryData]);
 
   
-
   return (
     <View style={styles.container}>
       
@@ -54,10 +50,7 @@ export default function BatteryComponent({ batteryData }: Props) {
         batteryData.currentState === 'Discharging' && { backgroundColor: '#ff6347' },
         batteryData.currentState === 'Neutral' && { backgroundColor: '#f0e68c' },
         ]}>
-        <Text style={[
-          styles.stateText
-
-        ]}>
+        <Text style={ styles.stateText }>
           {batteryData.currentState === 'Charging' && t("charge")}
           {batteryData.currentState === 'Discharging' && t("discharge")}
           {batteryData.currentState === 'Neutral' && t("neutral")}
