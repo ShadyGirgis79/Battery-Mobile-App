@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "276809198104",
+    "project_id": "battery-app-3e1bd",
+    "storage_bucket": "battery-app-3e1bd.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:276809198104:android:86c1249945892382cc716d",
+        "android_client_info": {
+          "package_name": "com.batteryapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD67m4iSAFfWUxyWXpaZCgjaV37cgKKMSo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
