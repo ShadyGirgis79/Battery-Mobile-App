@@ -42,8 +42,8 @@ export default function HomeScreen() {
   }, [selectedTime, chargingCurrentState]);
 
   return (
-  <ImageBackground
-      source={require('../assets/background.jpg')}
+    <ImageBackground
+      source={require('../assets/images/background.jpg')}
       style={styles.backgroundImage}
     >
       <View style={styles.container}>
@@ -84,14 +84,14 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
     color: '#fff',
-    fontWeight: 'bold',
     marginBottom: 20,
     paddingTop: "20%",
+    fontFamily: 'Poppins-SemiBold',
   },
   languageButtonTop: {
     position: 'absolute',
     top: 80,
-    right: 20,
+    left: 20,
     borderWidth: 2,
     borderColor: '#3b5ea7',
     borderRadius: 25,

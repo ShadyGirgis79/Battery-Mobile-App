@@ -10,5 +10,6 @@
     "selectTime": "Select Time",
     "charge": "Charging",
     "discharge": "Discharging",
-    "neutral": "Neutral"
+    "neutral": "Neutral",
+    "open": "Open App"
 }

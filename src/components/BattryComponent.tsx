@@ -11,19 +11,19 @@ export default function BatteryComponent({ batteryData }: Props) {
 
   const { t } = useTranslation();
   const [batteryState, setBatteryState] = useState("");
-  const [batteryImage, setBatteryImage] = useState(require('../assets/Battery-100.png'));
+  const [batteryImage, setBatteryImage] = useState(require('../assets/images/Battery-100.png'));
 
   const updateBatteryImage = (level: number) => {
     if (level >= 80) {
-      setBatteryImage(require('../assets/Battery-100.png'));
+      setBatteryImage(require('../assets/images/Battery-100.png'));
     } else if (level >= 60) {
-      setBatteryImage(require('../assets/Battery-80.png'));
+      setBatteryImage(require('../assets/images/Battery-80.png'));
     } else if (level >= 40) {
-      setBatteryImage(require('../assets/Battery-60.png'));
+      setBatteryImage(require('../assets/images/Battery-60.png'));
     } else if (level >= 20) {
-      setBatteryImage(require('../assets/Battery-40.png'));
+      setBatteryImage(require('../assets/images/Battery-40.png'));
     } else {
-      setBatteryImage(require('../assets/Battery-20.png'));
+      setBatteryImage(require('../assets/images/Battery-20.png'));
     }
   };
 
@@ -85,5 +85,6 @@ const styles = StyleSheet.create({
     fontSize: 28,
     marginTop: 5,
     color: '#000',
+    fontFamily: 'Poppins-Medium',
   }
 });
