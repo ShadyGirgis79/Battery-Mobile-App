@@ -85,22 +85,24 @@ const styles = StyleSheet.create({
     fontSize: 32,
     color: '#fff',
     marginBottom: 20,
-    paddingTop: "20%",
+    paddingTop: "25%",
     fontFamily: 'Poppins-SemiBold',
   },
   languageButtonTop: {
     position: 'absolute',
-    top: 80,
+    top: "10%",
     left: 20,
     borderWidth: 2,
     borderColor: '#3b5ea7',
     borderRadius: 25,
     paddingHorizontal: 12,
     paddingVertical: 6,
+    backgroundColor: 'rgba(59, 94, 167, 0.8)', // semi-transparent background
   },
   languageButtonText: {
     fontSize: 20,
     color: '#fff',
+    fontFamily: 'Poppins-Medium',
   },
   backgroundImage: {
     flex: 1,
