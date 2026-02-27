@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { ChargingState } from '../types';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   data: ChargingState[];
@@ -11,6 +12,7 @@ interface Props {
 
 export default function TimePicker({ data, selectedTime, onTimeChange }: Props) {
 
+  const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
 
   const handleConfirm = (date: Date) => {
@@ -39,7 +41,7 @@ export default function TimePicker({ data, selectedTime, onTimeChange }: Props) 
         <Text style={styles.buttonText}>
           {selectedTime
             ? new Date(selectedTime).toLocaleTimeString()
-            : 'Select Time'}
+            : t("selectTime")}
         </Text>
       </TouchableOpacity>
 
@@ -66,6 +68,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: 24,
   },
 });

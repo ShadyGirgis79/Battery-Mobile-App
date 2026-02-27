@@ -1,26 +1,29 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Touchable, TouchableOpacity, ImageBackground } from 'react-native';
 import React, { useEffect, useState, useMemo } from 'react';
 import BackendResponse from '../constants/backend-response.json';
 import { ChargingHistoryResponse, ChargingState } from '../types';
 import { checkChargingState } from "../utils/BatteryState";
+import { useTranslation } from 'react-i18next';
+import LanguageModal from '../components/LanguageModal';
 import BatteryComponent from '../components/BattryComponent';
 import TimePicker from '../components/TimePicker';
 
 export default function HomeScreen() {
 
+  const { t } = useTranslation();
+  const currentTime = new Date().toISOString();
+
   const [chargingCurrentState, setChargingCurrentState] = useState<ChargingState[]>([]);
-  const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  const [selectedTime, setSelectedTime] = useState<string | null>(currentTime);
+  const [languageModalVisible, setLanguageModalVisible] = useState(false);
 
   const chargingData = async () => {
     try {
+      // Will change it with the backend API call
       const data = BackendResponse as ChargingHistoryResponse;
+      
       const processed = checkChargingState(data.chargingStates);
       setChargingCurrentState(processed);
-
-      // Set default time to first item
-      if (processed.length > 0) {
-        setSelectedTime(processed[0].date);
-      }
 
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -39,19 +42,36 @@ export default function HomeScreen() {
   }, [selectedTime, chargingCurrentState]);
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Battery Charging History</Text>
+    <ImageBackground
+      source={require('../assets/images/background.jpg')}
+      style={styles.backgroundImage}
+    >
+      <View style={styles.container}>
+        <TouchableOpacity
+          style={styles.languageButtonTop}
+          onPress={() => setLanguageModalVisible(true)}
+        >
+          <Text style={styles.languageButtonText}>{t("language")} 🌍</Text>
+        </TouchableOpacity>
 
-      <TimePicker
-        data={chargingCurrentState}
-        selectedTime={selectedTime}
-        onTimeChange={setSelectedTime}
-      />
+        <Text style={styles.title}>{t("header")}</Text>
 
-      {matchedBattery && (
-        <BatteryComponent batteryData={matchedBattery} />
-      )}
-    </View>
+        <TimePicker
+          data={chargingCurrentState}
+          selectedTime={selectedTime}
+          onTimeChange={setSelectedTime}
+        />
+
+        {matchedBattery && (
+          <BatteryComponent batteryData={matchedBattery} />
+        )}
+
+        <LanguageModal
+          visible={languageModalVisible}
+          onClose={() => setLanguageModalVisible(false)}
+        />
+      </View>
+    </ImageBackground>
   );
 }
 
@@ -62,8 +82,30 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontSize: 22,
-    fontWeight: 'bold',
+    fontSize: 32,
+    color: '#fff',
     marginBottom: 20,
-  }
+    paddingTop: "20%",
+    fontFamily: 'Poppins-SemiBold',
+  },
+  languageButtonTop: {
+    position: 'absolute',
+    top: 80,
+    left: 20,
+    borderWidth: 2,
+    borderColor: '#3b5ea7',
+    borderRadius: 25,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+  },
+  languageButtonText: {
+    fontSize: 20,
+    color: '#fff',
+  },
+  backgroundImage: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover', // ensures image covers the screen
+  },
 });
